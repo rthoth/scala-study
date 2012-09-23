@@ -1,19 +1,22 @@
 /**
 	Hey, Can you search center of mass?
 */
-def centerOfMass(dots:List[Tuple2[Int, Int]]):Tuple3[BigDecimal,BigDecimal, Int] = {
+
+def centerOfMass(dots:List[Tuple2[Int, Int]]):Tuple3[BigDecimal, BigDecimal, Int] =
 	if (dots == null || dots.isEmpty)
-		(0,0,0)
-	else if (dots.size == 1)
-		(dots.head._1, dots.head._2, 1)
-	else {
-		val me = dots.head;
-		val other = centerOfMass(dots.tail)
-		val ix = (me._1 - other._1) / (other._3 + 1)
-		val iy = (me._2 - other._2) / (other._3 + 1)
-		(other._1 + ix, other._2 + iy, other._3 + 1)
+		null
+	else if (dots.size == 1) {
+		val mc = new java.math.MathContext(64)
+		(BigDecimal(dots.head._1, mc), BigDecimal(dots.head._2, mc), 1)
+	} else {
+		val tail = centerOfMass(dots.tail)
+		val head = dots.head;
+		val x = tail._1 * tail._3 + head._1
+		val y = tail._2 * tail._3 + head._2
+		val mass = tail._3 + 1
+		(x/mass, y/mass, mass)
 	}
-}
+
 
 
 val square = List((0,0), (1,0), (1,1), (0, 1))
@@ -36,16 +39,17 @@ println (centerOfMass(null))
 
 
 var bigLine:List[Tuple2[Int, Int]] = Nil;
-for (i <- 0 to 2000) 
+
+for (i <- -500 to 500) 
 	bigLine = (i, 0) :: bigLine
 
 
-val dot = (0,10) :: Nil
+val dot = (0,500) :: Nil
 
 println (centerOfMass(bigLine))
 println (centerOfMass(bigLine.reverse))
 
 println (centerOfMass( dot ::: bigLine ))
-println (centerOfMass( dot ::: bigLine.reverse ))
 println (centerOfMass(bigLine ::: dot))
+println (centerOfMass( dot ::: bigLine.reverse ))
 println (centerOfMass(bigLine.reverse ::: dot))
