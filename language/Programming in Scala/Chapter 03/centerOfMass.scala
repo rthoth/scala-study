@@ -1,8 +1,7 @@
 /**
 	Hey, Can you search center of mass?
 */
-
-def centerOfMass(dots:List[Tuple2[Int, Int]]):Tuple3[Double,Double, Int] = {
+def centerOfMass(dots:List[Tuple2[Int, Int]]):Tuple3[BigDecimal,BigDecimal, Int] = {
 	if (dots == null || dots.isEmpty)
 		(0,0,0)
 	else if (dots.size == 1)
@@ -31,3 +30,22 @@ val square3 = List((0,0), (1,0), (0,1), (1,1))
 
 println (centerOfMass(square3))
 println (centerOfMass(square3.reverse))
+
+println (centerOfMass (Nil))
+println (centerOfMass(null))
+
+
+var bigLine:List[Tuple2[Int, Int]] = Nil;
+for (i <- 0 to 2000) 
+	bigLine = (i, 0) :: bigLine
+
+
+val dot = (0,10) :: Nil
+
+println (centerOfMass(bigLine))
+println (centerOfMass(bigLine.reverse))
+
+println (centerOfMass( dot ::: bigLine ))
+println (centerOfMass( dot ::: bigLine.reverse ))
+println (centerOfMass(bigLine ::: dot))
+println (centerOfMass(bigLine.reverse ::: dot))
