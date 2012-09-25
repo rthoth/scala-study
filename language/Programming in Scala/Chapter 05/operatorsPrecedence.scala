@@ -79,3 +79,27 @@ println("___________________________________________________________")
 
 Operand() *+ Operand() +* Operand()
 println("___________________________________________________________")
+
+
+
+class Associate {
+	def * (other:Associate) = this
+	def -: (other:Associate) = this
+}
+
+
+
+val a1 = new Associate
+val a2 = new Associate
+val a3 = new Associate
+
+// If a1 * a2 => a1.*(a2) then it's equal a1
+assert ((a1 * a2) eq a1)
+
+// If a1 -: a2 => a2.-:(a1) then it's equal a2
+assert ((a1 -: a2) eq a2)
+
+// If ((a1 * a2) -: a3) => a3.-:(a1.*(a2)) then it's equal a3
+assert  ( ((a1 * a2) -: a3) eq a3)
+// if ((a3 -: a1) * a2) => (a1.-:(a3)).*(a2) then it's equal a1
+assert (((a3 -: a1) * a2) eq a1)
