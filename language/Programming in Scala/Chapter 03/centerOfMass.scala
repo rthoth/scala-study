@@ -3,6 +3,7 @@
 */
 
 def centerOfMass(dots:List[Tuple2[Int, Int]]):Tuple3[BigDecimal, BigDecimal, Int] =
+	
 	if (dots == null || dots.isEmpty)
 		null
 	else if (dots.size == 1) {
