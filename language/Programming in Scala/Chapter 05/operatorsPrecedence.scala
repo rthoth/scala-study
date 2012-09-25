@@ -104,3 +104,6 @@ assert  ( ((a1 * a2) -: a3) eq a3)
 
 // if ((a3 -: a1) * a2) => (a1.-:(a3)).*(a2) then it's equal a1
 assert (((a3 -: a1) * a2) eq a1)
+
+// if (a1 -: a2 -: a3) => a3.-:(a2.-:(a1)) then it's equal a3
+assert ((a1 -: a2 -: a3) eq a3)
