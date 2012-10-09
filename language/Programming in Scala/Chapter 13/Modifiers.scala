@@ -26,3 +26,12 @@ package object outerspace {
 
 	def show(i:Int):String = i.toString
 }
+
+
+package ufla.dcc {
+	object BlaftStof {
+		import outerspace.show
+
+		override def toString = show(5)
+	}
+}
