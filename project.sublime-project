@@ -6,6 +6,9 @@
 		},
 		{
 			"path": "sbt"
+		},
+		{
+			"path": "IoC_DI"
 		}
 	]
 }

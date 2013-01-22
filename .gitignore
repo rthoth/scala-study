@@ -1,5 +1,5 @@
 *.class
 *.sublime-workspace
-/target/
+target/
 jd-gui.cfg
 *.tmp
