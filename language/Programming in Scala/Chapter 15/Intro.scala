@@ -190,6 +190,7 @@ val list = List(Some(1), Some(2), Some(3), None, Some(5), None, Some(6))
 // Do you understand?
 val factors = for (Some(n) <- list) yield n
 
-assert (factors.reduce( (x, y) => x * y ) == 180, "make sense #5")
+assert(factors.size == 5, "make sense #5")
+assert (factors.reduce( (x, y) => x * y ) == 180, "make sense #6")
 
 
