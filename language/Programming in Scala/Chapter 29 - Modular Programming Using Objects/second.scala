@@ -99,7 +99,7 @@ package recipes {
 	}
 
 	object CommonBrowser extends Browser {
-		val database = CommonDatabase
+		val database: CommonDatabase.type = CommonDatabase
 	}
 
 	object StudentDatabase extends Database {
@@ -119,7 +119,7 @@ package recipes {
 	}
 
 	object StudentBrowser extends Browser {
-		val database = StudentDatabase
+		val database: StudentDatabase.type = StudentDatabase
 	}
 }
 
@@ -136,8 +136,16 @@ package recipes.t2 {
 	import recipes._
 
 	object T extends App {
-		val category = StudentDatabase.allCategories.head
+		
+		// Tracking module instances...
+		val db: Database = CommonDatabase
 
+		object B extends Browser {
+			val database: db.type = db
+		}
+
+		for (category <- db.allCategories)
+			B displayCategory category
 
 	}
 }
