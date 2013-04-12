@@ -141,7 +141,7 @@ package recipes.t2 {
 		val db: Database = CommonDatabase
 
 		object B extends Browser {
-			val database: db.type = db
+			val database: db.type	 = db
 		}
 
 		for (category <- db.allCategories)
