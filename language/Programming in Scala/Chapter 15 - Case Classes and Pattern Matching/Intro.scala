@@ -143,18 +143,21 @@ assert(widthDefault(Some(-1)) == 1, "case sequence functions #2")
 assert(widthDefault(None) == 0, "case sequence functions #3")
 
 
-val second:List[Int]=>Int = {
+val second: List[Int]=>Int = {
 	case x :: y :: _ => y
 }
 
 
 assert(second(List(1,-1,0)) == -1, "case sequence functions #4")
-try {
-	assert(second(List(1)) == 0, "case sequence functions #5")
-} catch {
-	case e:MatchError => assert(true)
-	case _:Throwable => assert(false, "case sequence functions #6")
-}
+
+assert ({
+	try {
+		second(List(1)) == 0
+	} catch {
+		case e: MatchError => true
+		case _: Throwable => false
+	}
+}, "case sequence functions #5")
 
 val secondPartial:PartialFunction[List[Int], Int] = {
 	case x :: y :: _ => y
@@ -164,6 +167,8 @@ val secondPartial:PartialFunction[List[Int], Int] = {
 assert(secondPartial.isDefinedAt(List(-1,-2,3)), "case sequence functions #7")
 assert(!secondPartial.isDefinedAt(List()), "case sequence functions #8")
 assert(!secondPartial.isDefinedAt(List(0)), "case sequence functions #9")
+
+assert(-2 == secondPartial(List(0,-2,3)))
 
 
 // Here makes sense....case as partial functions
